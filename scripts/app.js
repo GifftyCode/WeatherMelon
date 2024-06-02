@@ -1,12 +1,35 @@
 const cityForm = document.querySelector("form");
+const card = document.querySelector(".card");
+const details = document.querySelector(".details");
+
+const updateTemplate = (data) => {
+  // getting the data
+  const cityDetails = data.cityDetails;
+  const weatherDetails = data.weatherDetails;
+
+  // updating the UI
+  details.innerHTML = `
+          <h5 class="my-3">${cityDetails.EnglishName}</h5>
+          <div class="my-3">${weatherDetails.WeatherText}</div>
+          <div class="display-4 my-4">
+            <span>${weatherDetails.Temperature.Metric.Value}</span>
+            <span>&deg;C</span>
+          </div>
+  `;
+
+  //Removing display none property
+  if (card.classList.contains("d-none")) {
+    card.classList.remove("d-none");
+  }
+};
 
 const updateCity = async (city) => {
   const cityDetails = await getCity(city);
   const weatherDetails = await getWeather(cityDetails.Key);
 
   return {
-    cityDetails: cityDetails,
-    weatherDetails: weatherDetails,
+    cityDetails,
+    weatherDetails,
   };
 };
 
@@ -19,6 +42,6 @@ cityForm.addEventListener("submit", (e) => {
 
   // update the UI
   updateCity(cityInput)
-    .then((data) => console.log(data))
+    .then((data) => updateTemplate(data))
     .catch((err) => console.log(err));
 });
