@@ -1,6 +1,8 @@
 const cityForm = document.querySelector("form");
 const card = document.querySelector(".card");
 const details = document.querySelector(".details");
+const time = document.querySelector("img.time");
+const icon = document.querySelector(".icon img");
 
 const updateTemplate = (data) => {
   // getting the data
@@ -21,6 +23,21 @@ const updateTemplate = (data) => {
             <span>&deg;C</span>
           </div>
   `;
+
+  // displaying weather img
+  let timeSrc = null;
+  if (weatherDetails.IsDayTime) {
+    timeSrc = "img/day.svg";
+  } else {
+    timeSrc = "img/night.svg";
+  }
+
+  time.setAttribute("src", timeSrc);
+
+  // displaying weather icons
+  let iconSrc = `img/icons/${weatherDetails.WeatherIcon}.svg`;
+
+  icon.setAttribute("src", iconSrc);
 
   //Removing display none property
   if (card.classList.contains("d-none")) {
