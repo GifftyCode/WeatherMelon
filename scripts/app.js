@@ -4,12 +4,17 @@ const details = document.querySelector(".details");
 
 const updateTemplate = (data) => {
   // getting the data
-  const cityDetails = data.cityDetails;
-  const weatherDetails = data.weatherDetails;
+  // const cityDetails = data.cityDetails;
+  // const weatherDetails = data.weatherDetails;
+
+  //  Destructuring
+  const { cityDetails, weatherDetails } = data;
 
   // updating the UI
   details.innerHTML = `
-          <h5 class="my-3">${cityDetails.EnglishName}</h5>
+          <h5 class="my-3">${cityDetails.EnglishName},
+          ${cityDetails.Country.EnglishName}
+          </h5>
           <div class="my-3">${weatherDetails.WeatherText}</div>
           <div class="display-4 my-4">
             <span>${weatherDetails.Temperature.Metric.Value}</span>
